@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import styles from "./login.module.css";
 import axios from "axios";
 import { API_URL } from "../components/constant/constant";
+import Swal from "sweetalert2";
 const Login = () => {
   const [InitializeState, SetInitializeState] = useState({
     email: "",
@@ -23,17 +24,31 @@ const Login = () => {
   const handleLogin = async () =>{
     let res:any = "";
     try{
-      res = await axios.post(API_URL.LOGIN,CredentialState);
+      res = await axios.post(API_URL.LOGIN,CredentialState,{withCredentials: true});
     } catch(error){
       console.log(error);
     }
 
     if(res.status == 201){
-      alert('เข้าสู่ระบบสำเร็จ');
-      window.location.href = "/";
+      Swal.fire({
+        position: "center",
+        icon: "success",
+        title: "เข้าสู่ระบบสำเร็จ",
+        showConfirmButton: false,
+        timer: 1500
+      }).then(() =>{
+        window.location.href = "/"
+      })
+      console.log(res);
+      
     }
     else{
-      alert("เข้าสู่ระบบไม่สำเร็จ")
+      Swal.fire({
+        position: "center",
+        icon: "error",
+        title: "เข้าสู่ระบบไม่สำเร็จ",
+        text: "ชื่อผู้ใช้งานหรือรหัสผ่านไม่ถูกต้อง โปรดลองอีกครั้ง",
+      })
     }
   }  
   return (

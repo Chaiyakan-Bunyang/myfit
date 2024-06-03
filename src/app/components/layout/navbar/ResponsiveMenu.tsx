@@ -6,12 +6,12 @@ type propsType = {
 }
 const ResponsiveMenu = (props:propsType) => {
     const {ShowMenu} = props;
-    console.log(props);
+    console.log('this is props',props);
     
   return (
     <div 
-        className={`${ShowMenu ? "-left-[100%]" 
-        : "left-0"} h-screen w-[50%] bg-slate-800 fixed top-0 z-50 transition-all duration-500 pt-24 pb-6 px-8
+        className={`${ShowMenu ? "left-0" 
+        : "-left-[100%]"} h-screen w-[50%] bg-slate-800 fixed top-0 z-50 transition-all duration-500 pt-24 pb-6 px-8
         flex justify-between flex-col text-white
         `}
     >
