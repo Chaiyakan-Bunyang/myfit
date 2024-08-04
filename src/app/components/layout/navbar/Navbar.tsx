@@ -9,7 +9,6 @@ import ResponsiveMenu from "./ResponsiveMenu";
 import axios from "axios";
 import { API_URL, NEXT_API_URL } from "../../constant/constant";
 import Swal from "sweetalert2";
-import Cookies from 'js-cookie'
 const Navbar = () => {
   const [ShowMenu,SetShowMenu] = useState(false);
   const [user,SetStateUser] = useState({
@@ -142,7 +141,7 @@ const Navbar = () => {
       </header>
       {/* Mobile Menu Section */}
       <div className="md:hidden">
-      <ResponsiveMenu ShowMenu = {ShowMenu}/>
+      <ResponsiveMenu ShowMenu = {ShowMenu} User={user}/>
       </div>
     </div>
       

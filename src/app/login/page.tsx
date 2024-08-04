@@ -4,13 +4,16 @@ import styles from "./login.module.css";
 import axios from "axios";
 import { API_URL } from "../components/constant/constant";
 import Swal from "sweetalert2";
+import { FaEye } from "react-icons/fa";
+import { FaEyeLowVision } from "react-icons/fa6";
 const Login = () => {
   const [InitializeState, SetInitializeState] = useState({
     email: "",
     password: "",
   });
-
+  const [showPassword, SetShowPassword] = useState(false);
   const [CredentialState,SetCredentialState] = useState(InitializeState);
+
   const handleChange = (e:any) => {
     let value:any = e.target.value;
     let name:any = e.target.name;
@@ -50,7 +53,10 @@ const Login = () => {
         text: "ชื่อผู้ใช้งานหรือรหัสผ่านไม่ถูกต้อง โปรดลองอีกครั้ง",
       })
     }
-  }  
+  } 
+  const togglePassword = () =>{
+    SetShowPassword(!showPassword);
+  } 
   return (
     <main>
       <div
@@ -74,18 +80,21 @@ const Login = () => {
               onChange={(e)=>handleChange(e)}
             />
           </div>
-          <div className="mt-3">
+          <div className="mt-3 relative">
             <label htmlFor="Password" className="block text-base mb-2">
               รหัสผ่าน
             </label>
             <input
-              type="text"
+              type={showPassword ? 'text' : 'password'}
               id="Password"
               name="password"
               className="border w-full text-base px-2 py-1 focus:outline-none focus:right-0 focus:border-gray-600"
               placeholder="กรุณากรอกรหัสผ่าน"
               onChange={(e)=>handleChange(e)}
             />
+            <span className="absolute inset-y-10 right-2 cursor-pointer" onClick={togglePassword}>
+              {showPassword ? <FaEye/> : <FaEyeLowVision/> }
+            </span>  
           </div>
           <div className="mt-3 flex justify-between items-center">
             <div>
